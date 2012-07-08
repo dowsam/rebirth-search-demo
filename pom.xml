@@ -17,7 +17,14 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
+		<repository>
+			<id>rebirth</id>
+			<name>Rebirth Additional Repository</name>
+			<url>svn://svn.jsp1.net/rebirth/repository</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>ljump</id>
 			<name>Ljump Additional Repository</name>
