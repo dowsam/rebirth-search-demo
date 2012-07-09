@@ -20,10 +20,12 @@
 		<repository>
 			<id>rebirth</id>
 			<name>Rebirth Additional Repository</name>
-			<url>svn://svn.jsp1.net/rebirth/repository</url>
+			<url>svn:svn://svn.jsp1.net/rebirth/repository</url>
+			<!-- test close 
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+			-->
 		</repository>
 		<repository>
 			<id>ljump</id>
@@ -190,5 +192,12 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.jvnet.wagon-svn</groupId>
+				<artifactId>wagon-svn</artifactId>
+				<version>1.12</version>
+			</extension>
+		</extensions>
 	</build>
 </project>
