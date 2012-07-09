@@ -5,7 +5,7 @@
 	<groupId>cn.com.rebirth</groupId>
 	<artifactId>rebirth-search-demo</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1.RC1-SNAPSHOT</version>
+	<version>0.0.1.RELEASE</version>
 	<name>Rebirth :: Module :: rebirth-search-demo</name>
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
@@ -50,7 +50,7 @@
 		<dependency>
 			<artifactId>rebirth-search-client</artifactId>
 			<groupId>cn.com.rebirth</groupId>
-			<version>0.0.1.RC1-SNAPSHOT</version>
+			<version>0.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
