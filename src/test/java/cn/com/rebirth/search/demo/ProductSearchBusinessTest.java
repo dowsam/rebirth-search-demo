@@ -1,5 +1,7 @@
 package cn.com.rebirth.search.demo;
 
+import java.util.List;
+
 import junit.framework.Assert;
 
 import org.junit.AfterClass;
@@ -8,7 +10,9 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.com.rebirth.commons.Page;
-import cn.com.rebirth.commons.search.SearchPageRequest;
+import cn.com.rebirth.search.client.HighlightSearchPageRequest;
+
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -24,6 +28,7 @@ public class ProductSearchBusinessTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		System.setProperty("search.core.discovery.initial_state_timeout", "5m");
 		System.setProperty("rebirth.search.server.cluster", "rebirth-search-server-cluster");
 		System.setProperty("default_operator", "and");
 		applicationContext = new ClassPathXmlApplicationContext("/applicationContext.xml");
@@ -55,7 +60,10 @@ public class ProductSearchBusinessTest {
 
 	@Test
 	public void testSearchStringPageRequest() {
-		SearchPageRequest pageRequest = new SearchPageRequest();
+		HighlightSearchPageRequest pageRequest = new HighlightSearchPageRequest();
+		List<HighlightSearchPageRequest.HighligthSearchField> highligthSearchFields = Lists.newArrayList();
+		highligthSearchFields.add(new HighlightSearchPageRequest.HighligthSearchField("name"));
+		pageRequest.setHighligthSearchFields(highligthSearchFields);
 		Page<Product> page = business.search("name:'智能'", pageRequest);
 		Assert.assertEquals(1, page.getTotalItems());
 		page = business.search("mall:'苏宁易购'", pageRequest);
