@@ -1,5 +1,7 @@
 package cn.com.rebirth.search.demo;
 
+import java.util.Date;
+
 import cn.com.rebirth.commons.search.annotation.AnalyzerType;
 import cn.com.rebirth.commons.search.annotation.FieldAnalyzer;
 import cn.com.rebirth.commons.search.annotation.FieldBoost;
@@ -59,5 +61,17 @@ public class Product {
 	private String mall;
 
 	private String desc;
+
+	private Date createTime;
+
+	@FieldIndex(value = FieldIndex.NO_ANALYZED)
+	@FieldStore(value = FieldStore.NO)
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
 }

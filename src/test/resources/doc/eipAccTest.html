@@ -1,0 +1,99 @@
+<html xmlns="http://www.w3.org/1999/xhtml">  
+<head>  
+<title>接入系统SSO登录</title>  
+<script type="text/javascript" language="javascript">  
+var xmlHttp;   
+function createXmlHttpRequestObject(url)   
+{ try   
+  {
+  alert("登录地址为："+url);
+  xmlHttp = new XMLHttpRequest();  //火狐浏览器 
+  }
+  catch(e)   
+  {
+  //IE浏览器
+    var XmlHttpVersions = new Array("MSXML2.XMLHTTP.6.0",   
+                          "MSXML2.XMLHTTP.5.0",   
+                          "MSXML2.XMLHTTP.4.0",   
+                          "MSXML2.XMLHTTP.3.0",   
+                          "MSXML2.XMLHTTP",   
+                          "Microsoft.XMLHTTP");                        
+    for(var i=0;i<XmlHttpVersions.length && !xmlHttp; i++)   
+    {   
+      try   
+      {   
+        xmlHttp = new ActiveXObject(XmlHttpVersions[i]);   
+      }   
+      catch(e){}   
+    }   
+  }   
+     
+  if(!xmlHttp)   
+    alert('Error creating the XMLHttpRequest object.');   
+  else   
+  {   
+    xmlHttp.open("POST",url,true);   
+    xmlHttp.onreadystatechange = callback;   
+    xmlHttp.send(null);   
+  }   
+}   
+  
+function callback()   
+{   
+  if(xmlHttp.readystate == 4) //successful   
+  {   
+    if(xmlHttp.status==200) //OK   
+    {   
+      Display();   
+    }   
+    else   
+    {   
+      alert("error!");   
+    }   
+  }   
+  else   
+  {   
+    document.getElementById("myTime").innerHTML="loading..." + new Date();   
+  }   
+}   
+  
+function Display()   
+{   
+   document.getElementById("myTime").innerHTML="OK...CODE:"+xmlHttp.responseText+" date:"+ new Date(); 
+   document.getElementById("syncCode").value=xmlHttp.responseText; 
+}   
+
+function open11()   
+{  
+   createXmlHttpRequestObject(document.getElementById("loginUrl").value+"?EIPSSOToAccessURL="+document.getElementById("accessUrl").value+"&DstSysID="+document.getElementById("dstSysID").value); 
+}  
+</script>  
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>  
+<body>  
+<div id="myTime"></div>  
+接入系统URL:
+<input type="text" id="accessUrl" value="http://134.129.126.18:7001/ffcs-uam/eipIndex.jsp" name="accessUrl"></br>
+登录地址URL:
+<!--<input type="text" id="loginUrl" value="http://202.101.128.200:7010/ffcs-uam/EIPAccessLogin" name="loginUrl"></br>-->
+<input type="text" id="loginUrl" value="http://134.129.126.18:7001/ffcs-uam/EIPAccessLogin" name="loginUrl"></br>
+接入系统ID：
+<select name="dstSysID" class="textbox" id="dstSysID"
+								style="width: 135px;">
+								<option value="14201">
+									CRM
+								</option>
+								<option value="14202">
+									10000
+								</option>
+								<option value="14203">
+									知识库
+								</option>
+							</select></br>
+身份证:
+<input type="text" id="syncCode" name="syncCode"></br>
+<input id="Button1" type="button" value="接入系统获取身份证" onclick="open11();"/>  
+</body>  
+</html>
+

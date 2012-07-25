@@ -4,10 +4,15 @@
  */
 package cn.com.rebirth.search.demo;
 
+import java.util.Date;
+
+import org.apache.commons.beanutils.converters.DateConverter;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.com.rebirth.commons.Page;
 import cn.com.rebirth.commons.search.SearchPageRequest;
+import cn.com.rebirth.commons.utils.ConvertUtils;
+import cn.com.rebirth.commons.utils.DateUtils;
 
 /**
  * The Class MyNewsTest.
@@ -22,8 +27,16 @@ public class MyNewsTest {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
+		DateConverter dc = new DateConverter();
+		dc.setUseLocaleFormat(true);
+		dc.setPatterns(new String[] { "yyyyMMddHHmmss" });
+		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
+		Date date = DateUtils.getCurrentDateTime();
+		String str = ConvertUtils.convertObjectToObject(date, String.class);
+		System.out.println(str);
 		System.setProperty("rebirth.search.server.cluster", "rebirth-search-server-cluster");
 		System.setProperty("default_operator", "and");
+		System.setProperty("zk.zkConnect", "192.168.2.179");
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 				"/applicationContext.xml");
 		MyNewsSumMallSearchBusiness business = new MyNewsSumMallSearchBusiness();
